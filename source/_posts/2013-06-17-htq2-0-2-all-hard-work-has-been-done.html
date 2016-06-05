@@ -1,0 +1,44 @@
+---
+layout: post
+title: htq2 0.2 - All hard work has been done!
+date: 2013-06-17 07:00:08.000000000 +02:00
+type: post
+published: true
+status: publish
+categories:
+- Computer Liebe
+- Computer Programming
+- English
+- Games
+- Hecatomb Quake II
+- Open Source
+tags:
+- c++
+- gaming
+- linux
+- open source
+- programming
+- quake2
+- software
+meta:
+  _edit_last: '36458306'
+  _publicize_pending: '1'
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";i:0;s:6:"author";s:8:"36458306";s:7:"blog_id";s:8:"51693188";s:9:"mod_stamp";s:19:"2013-06-17
+    02:00:59";}
+  _wpas_done_2067503: '1'
+  _publicize_done_external: a:1:{s:8:"facebook";a:1:{i:635926017;b:1;}}
+  publicize_twitter_user: alericoveri
+  _wpas_done_2067514: '1'
+  _wpas_done_2423482: '1'
+author:
+  login: axltxl
+  email: me@axltxl.xyz
+  display_name: Axel Texel
+  first_name: ''
+  last_name: ''
+---
+<p>All of new features have been finally developed and done and now it's time to do the polishing and some exhausting evaluation, but as I write in this moment I just can't simply avoid this surprising fact: <em>htq2 0.2</em> to this day<em> it's ALMOST working out-of-the-box with SDL2 OS X port</em>, in fact building it against SDL2 on OS X has showed me some weird behaviors about what <code>SDL_SetRelativeMouseMode</code> and <code>SDL_WarpMouseInWindow</code> are supposed to be, it seems that there are strange things around SDL2 in it's way to its rock-steady stability, my guess is that <em>htq2</em> development will go along with that of SDL2.</p>
+<p>I just can't wait for SDL2's first patch, and for that I've been making some isolated tests of my own with the latest bleeding-edge SDL2 source on most platforms, just to see what it's made of. The good news is that the SDL2 backend is working well on my Ubuntu box (and this will be the focus about SDL2 on 0.2 milestone). There have been some minor SDL2- related issues when it comes to switching to full screen with an OpenGL context set on (you can see the bug I recently posted on their <a href="http://bugzilla.libsdl.org/show_bug.cgi?id=1907" target="_blank">Bugzilla</a>), I've managed to get rid of it but its likely going to take some time before we see some real stability on SDL2, not much time I guess, these guys are great developers and therefore I'm sure that they'll tackle those bugs quickly.</p>
+<p>Well ... enough has been said, <em>htq2 0.2</em> is rolling and it'll be released soon :), it'll be just a matter of time, the code needs some tweaking (maybe some fixes) and further evaluation. As always, you're invited to clone the <a href="http://github.com/alericoveri/hecatomb" target="_blank">htq2 repo on GitHub</a> for getting in touch with its latest development state.</p>
+<p>Auf Wiedersehen<br />
+Alejandro</p>

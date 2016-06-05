@@ -1,0 +1,63 @@
+---
+layout: post
+title: htq2 - SDL2 backend in the works!
+date: 2013-06-09 21:48:56.000000000 +02:00
+type: post
+published: true
+status: publish
+categories:
+- Computer Liebe
+- Computer Programming
+- English
+- Gaming
+- Hecatomb Quake II
+- Open Source
+tags:
+- c++
+- computer
+- games
+- open source
+- programming
+- quake2
+- sdl2
+meta:
+  _edit_last: '36458306'
+  draftfeedback_requests: a:1:{s:19:"ornella87@gmail.com";a:3:{s:3:"key";s:13:"51b3504a58ce2";s:4:"time";s:10:"1370705994";s:7:"user_id";s:8:"36458306";}}
+  _wpas_done_2067503: '1'
+  publicize_reach: a:3:{s:7:"twitter";a:1:{i:2067514;i:187;}s:2:"fb";a:1:{i:2067503;i:374;}s:2:"wp";a:1:{i:0;i:1;}}
+  _publicize_done_external: a:1:{s:8:"facebook";a:1:{i:635926017;b:1;}}
+  publicize_twitter_user: alericoveri
+  _wpas_done_2067514: '1'
+  _wpas_done_2423482: '1'
+  _wpas_skip_2067503: '1'
+  _wpas_skip_2067514: '1'
+  _wpas_skip_2423482: '1'
+  tagazine-media: a:7:{s:7:"primary";s:0:"";s:6:"images";a:0:{}s:6:"videos";a:0:{}s:11:"image_count";i:0;s:6:"author";s:8:"36458306";s:7:"blog_id";s:8:"51693188";s:9:"mod_stamp";s:19:"2013-06-10
+    15:06:31";}
+author:
+  login: axltxl
+  email: me@axltxl.xyz
+  display_name: Axel Texel
+  first_name: ''
+  last_name: ''
+---
+<p style="text-align:left;">As of today, I've been working on an <a href="http://github.com/alericoveri/hecatomb/tree/SDL2" target="_blank">experimental branch towards SDL2 migration</a> and I can tell you people that it's cooking really nice!, all of it has been built along with SDL1 with certain code separation via some preprocessor directives generated at config time, I'm really loving this baby so far.  This brand new and shiny SDL2 backend is now on its heaviest development state and it will be eventually merged onto the <code>master</code> branch when I consider it appropriate (when it gets a little more decent if I may be sincere with you). Of course it's working, it compiles and runs without any crashes at least, it has some flaws and deficiencies, but as you know SDL2 is barely seeing the light of dawn, as soon as it made it to RC1 I got interested to finally use it and give it a try. <a href="http://wiki.libsdl.org/moin.fcg/CategoryAPI" target="_blank">SDL2</a> so far has proven to be potentially <strong>the greatest feature present in <em>htq2 </em>for its <span style="text-decoration:underline;">v0.2</span> release!</strong><em>.<!--more--><br />
+</em></p>
+<p style="text-align:left;">At a first glance, thanks to this wonderful new SDL we have a real scancode-based keyboard input interpretation instead of the "old" (but nevertheless relevant) <code>SDLKey</code>-based one, yayyyyyy! at last!, this was by far the biggest pain in the A when it came to porting any Quake-based engine with SDL, including <a href="http://ioquake3.org" target="_blank">ioquake3</a>. At the same time, it seems to me that  I watched a much smaller performance hit on the OpenGL rendering system, specially when it comes to swapping buffers (but I have to make sure about that), I can also see great opportunities for <em>htq2</em> as I dig deeper into the <a href="http://wiki.libsdl.org/moin.fcg/CategoryAPI" target="_blank">SDL2 source code</a>, there are these cool new kids on the block that I'm considering in this very moment. Currently, I'm focusing my efforts into the most appropriate implementation for the input system.</p>
+<p style="text-align:left;">These are the new features so far:</p>
+<ul>
+<li><a href="http://wiki.libsdl.org/moin.fcg/SDL_Scancode?highlight=%28\bCategoryEnum\b%29|%28SDLEnumTemplate%29|%28SGEnumerations%29" target="_blank"><code>SDL_Scancode</code></a>-based keyboard input interpretation (it makes run the game with virtually any keyboard now!).</li>
+<li>Use of the new <a href="http://wiki.libsdl.org/moin.fcg/SDL_GetRelativeMouseMode?highlight=%28\bCategoryAPI\b%29|%28SDLFunctionTemplate%29|%28SGFunctions%29" target="_blank"><code>SDL_SetRelativeMouseMode</code></a> (where available). If relative mouse mode is not supported on target platform <em>htq2</em> will then proceed to it's manual calculation through <a href="http://wiki.libsdl.org/moin.fcg/SDL_WarpMouseInWindow?highlight=%28\bCategoryAPI\b%29|%28SDLFunctionTemplate%29|%28SGFunctions%29" target="_blank"><code>SDL_WarpMouseInWindow</code></a> and <a href="http://wiki.libsdl.org/moin.fcg/SDL_GetMouseState?highlight=%28\bCategoryAPI\b%29|%28SDLFunctionTemplate%29|%28SGFunctions%29" target="_blank"><code>SDL_GetMouseState</code></a>.</li>
+<li>Use of <a href="http://wiki.libsdl.org/moin.fcg/SDL_SetWindowBrightness?highlight=%28\bCategoryAPI\b%29|%28SDLFunctionTemplate%29|%28SGFunctions%29" target="_blank"><code>SDL_SetWindowBrightness</code></a> for setting up the gamma ramp (it still doesn't do any effect on my Ubuntu box at least).</li>
+<li>SDL sound system was left untouched (as it hasn't changed at all in SDL2) and it works flawlessly so far.</li>
+<li>Several other equivalent SDL2 routine translations from SDL1 and some new calls that were necessary.</li>
+<li>Usage of SDL2 is optional through <a href="http://cmake.org" target="_blank">CMake</a> via <code>HT_WITH_SDL2</code>.</li>
+</ul>
+<p>What isn't working so good by now:</p>
+<ul>
+<li>Fullscreen window support (I haven't worked on that): It can switch to fullscreen back and forth, but internal surface dimensions do not comply with the current set display mode. I made a test case specially for this issue and apparently it's likely to be a bug on SDL2. On full screen mode, resolution tends to be always at desktop resolution no matter what. The issue is officially open at <a href="http://bugzilla.libsdl.org/show_bug.cgi?id=1907" target="_blank">SDL Bugzilla</a>.</li>
+</ul>
+<p>I noticed a few very small issues when I tried to compile it on my <a href="http://www.pcbsd.org/" target="_blank">PC-BSD</a> box, so far I can't get it to run on these BSD systems because apparently SDL2 is unable to get a valid OpenGL context on that system for some reason (I haven't dug deep enough on that issue yet) . I'm watching this library very closely while I'm writing to literally everyone on the SDL IRC channel, it'll be almost a sure thing that SDL2 will come out with a bunch of little bugs and something tells me already that I'll have to download their bleeding-edge source code in order to get the most of their fixes (specially on non-Linux/non-Windows systems).</p>
+<p>You're most welcome now to try out my <a href="https://github.com/alericoveri/hecatomb/tree/SDL2" target="_blank">SDL2 branch at GitHub</a> and drop me a line for whatever you may find :). I'm open to contributions. This is the current topic on <em>htq2</em> IRC channel under discussion, so join in :).</p>
+<p>Cheers.<br />
+Alejandro.</p>

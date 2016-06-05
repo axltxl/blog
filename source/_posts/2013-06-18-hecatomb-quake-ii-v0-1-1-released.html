@@ -1,0 +1,52 @@
+---
+layout: post
+title: Hecatomb Quake II v0.1.1 released!
+date: 2013-06-18 07:00:26.000000000 +02:00
+type: post
+published: true
+status: publish
+categories:
+- "*nix"
+- Computer Liebe
+- Computer Programming
+- English
+- Gaming
+- Hecatomb Quake II
+- Open Source
+tags:
+- games
+- linux
+- open source
+meta:
+  _edit_last: '36458306'
+  _publicize_pending: '1'
+  _wpas_done_2423482: '1'
+  tagazine-media: a:7:{s:7:"primary";s:58:"http://alericoveri.files.wordpress.com/2013/06/quake08.png";s:6:"images";a:1:{s:58:"http://alericoveri.files.wordpress.com/2013/06/quake08.png";a:6:{s:8:"file_url";s:58:"http://alericoveri.files.wordpress.com/2013/06/quake08.png";s:5:"width";i:1024;s:6:"height";i:480;s:4:"type";s:5:"image";s:4:"area";i:491520;s:9:"file_path";b:0;}}s:6:"videos";a:0:{}s:11:"image_count";i:1;s:6:"author";s:8:"36458306";s:7:"blog_id";s:8:"51693188";s:9:"mod_stamp";s:19:"2013-06-18
+    14:40:44";}
+  _wpas_done_2067503: '1'
+  _publicize_done_external: a:1:{s:8:"facebook";a:1:{i:635926017;b:1;}}
+  publicize_twitter_user: alericoveri
+  _wpas_done_2067514: '1'
+author:
+  login: axltxl
+  email: me@axltxl.xyz
+  display_name: Axel Texel
+  first_name: ''
+  last_name: ''
+---
+<p><a href="http://axltxl.files.wordpress.com/2013/06/quake08.png"><img class="aligncenter size-large wp-image-200" alt="quake08" src="{{ site.baseurl }}/assets/quake08.png?w=630" width="630" height="295" /></a></p>
+<p>That's right. First patch of <em>htq2</em> has arrived!, and it comes with a major revision of its CMake build scripts. These are the changes:</p>
+<ul>
+<li>[CMake] New options for choosing targets: <code>HT_CLIENT</code>, <code>HT_SERVER</code> and <code>HT_GAME</code></li>
+<li>[CMake] Scripts will now check for SDL version 1.2.*</li>
+<li>[OS X]<strong> Bundled frameworks are taken into account at last priority</strong>, that means that if external frameworks/libraries are found, they will be used instead, so you'll have the option of making experimental builds against alternate versions of dependencies. Now you can link with whatever libraries you want, go ahead and try some <code>brew install jpeg libvorbis</code>.</li>
+<li>
+<div id="LC29">[CMake] <code>HT_HUNKDRIVER_GENERIC</code> is now <strong>marked as an advanced option</strong></div>
+</li>
+<li>
+<div id="LC30">[Windows] Use of standard <code>main</code> on dedicated server (instead of <code>WinMain</code>)</div>
+</li>
+</ul>
+<p>You can download <em>htq2</em> at its <a href="http://alericoveri.github.io/hecatomb" target="_blank">new website hosted by GitHub</a>.<br />
+Enjoy!, and happy fragging!.</p>
+<p>Alejandro</p>

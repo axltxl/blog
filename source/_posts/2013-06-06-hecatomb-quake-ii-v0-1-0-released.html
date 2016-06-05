@@ -1,0 +1,66 @@
+---
+layout: post
+title: Hecatomb Quake II v0.1.0 released!
+date: 2013-06-06 11:00:54.000000000 +02:00
+type: post
+published: true
+status: publish
+categories:
+- "*nix"
+- Computer Liebe
+- Computer Programming
+- English
+- Games
+- Hecatomb Quake II
+- Open Source
+tags:
+- games
+- gaming
+- linux
+- open source
+- programming
+- ubuntu
+meta:
+  _edit_last: '36458306'
+  _format_url: ''
+  _publicize_pending: '1'
+  _format_link_url: ''
+  _format_quote_source_url: ''
+  _format_quote_source_name: ''
+  _format_image: ''
+  _format_gallery: ''
+  _format_audio_embed: ''
+  _format_video_embed: ''
+  _post_restored_from: a:3:{s:20:"restored_revision_id";i:73;s:16:"restored_by_user";i:36458306;s:13:"restored_time";i:1370533824;}
+  _wpas_done_2067503: '1'
+  _publicize_done_external: a:1:{s:8:"facebook";a:1:{i:635926017;b:1;}}
+  publicize_twitter_user: alericoveri
+  _wpas_done_2423482: '1'
+  tagazine-media: a:7:{s:7:"primary";s:56:"http://alericoveri.files.wordpress.com/2013/06/htq21.png";s:6:"images";a:2:{s:56:"http://alericoveri.files.wordpress.com/2013/06/htq21.png";a:6:{s:8:"file_url";s:56:"http://alericoveri.files.wordpress.com/2013/06/htq21.png";s:5:"width";i:1026;s:6:"height";i:509;s:4:"type";s:5:"image";s:4:"area";i:522234;s:9:"file_path";b:0;}s:55:"http://alericoveri.files.wordpress.com/2013/11/hunk.png";a:6:{s:8:"file_url";s:55:"http://alericoveri.files.wordpress.com/2013/11/hunk.png";s:5:"width";i:802;s:6:"height";i:629;s:4:"type";s:5:"image";s:4:"area";i:504458;s:9:"file_path";b:0;}}s:6:"videos";a:0:{}s:11:"image_count";i:2;s:6:"author";s:8:"36458306";s:7:"blog_id";s:8:"51693188";s:9:"mod_stamp";s:19:"2013-06-06
+    18:39:36";}
+  _wpas_skip_2067503: '1'
+  _wpas_skip_2067514: '1'
+  _wpas_skip_2423482: '1'
+author:
+  login: axltxl
+  email: me@axltxl.xyz
+  display_name: Axel Texel
+  first_name: ''
+  last_name: ''
+---
+<p style="text-align:justify;">I have spent the last five (5) weeks writing a portable Quake II client based mostly on <a href="http://yamagi.org/quake2" target="_blank">Yamagi Quake II</a>, it has been made mostly towards being a highly portable Q2 client.</p>
+<p style="text-align:justify;">Initial patching of the original YQ2 source code has diverged into my own project: <strong>Hecatomb (a.k.a. <em>htq2</em>)</strong>, a Quake II client who's being intensely developed towards <em>high portability</em>. The name came to my mind after I realized I had to do almost <em>groundbreaking </em>changes, hence that name, which in fact is also an allusion to a very old and cancelled game project back in the 90's in which <a href="http://rome.ro" target="_blank">John Romero</a> had something to do with. Serious decisions are being made by me at this point of its current ongoing development.<!--more--></p>
+<p style="text-align:justify;">The main focus of this project is portability, modernization and most of all, expansion capabilities, that will mean <em>htq2</em> would be not only portable, but also extensible. Hecatomb Quake II is actually fully supported on <strong>GNU/Linux</strong>, <strong>FreeBSD</strong>, <strong>OpenBSD</strong>, <strong>Windows</strong> and <strong>OS X</strong> systems, it runs at least on <strong>i386</strong>, <strong>amd64</strong> and<strong> ia64</strong> architectures. I'm doing efforts to make a portable codebase, and with that on the table it's highly possible to port <em>htq2</em> to these trending processor architectures and OS's like <a href="http://raspberrypi.org" target="_blank"><strong>Raspberry Pi</strong></a> on <strong>ARM</strong>, that would be interesting, though :). I would like to denote something on the <a href="http://ioquake3.org" target="_blank">ioquake3</a> project, what I like most from that project is the fact that it hasn't let Q3A to die at all, the game is more alive than ever and still kicking!, that's what I have always wanted to do with Q2 and this was for me the chance for it.</p>
+<p>[caption id="attachment_65" align="aligncenter" width="630"]<a href="http://axltxl.files.wordpress.com/2013/06/htq21.png"><img class="size-full wp-image-65" alt="htq2 v0.1.0 running with high resolution textures (using libjpeg), stencil shadows and anisotropic filtering. This is nothing new." src="{{ site.baseurl }}/assets/htq21.png" width="630" height="312" /></a> htq2 v0.1.0 running on a Ubuntu 13.04-amd64 box: with high resolution textures (using libjpeg), stencil shadows and anisotropic filtering. This is nothing new.[/caption]</p>
+<p style="text-align:justify;">These are the main changes for this release (and main differences from the original YQ2 client):</p>
+<p style="text-align:justify;"><strong>The codebase</strong>: I made several decisions. First of all was to reformat all code, there were lots of tabs and spaces and therefore the indentation was somewhat <em>kinky</em> with the different text editors, it's a very distracting factor indeed, so for that I applied a lot of <a href="http://astyle.sourceforge.net/" target="_blank">AStyle</a> formatting at first as a way to normalize all code (2-space indentation, visual aid comments, operator spaces, etc.). All headers were moved to an isolated <code>include/</code> directory, the code layout is now independent from headers organization, all <code>#include</code> statements are fixed to this directory and the code looks  now much more clean. A prerequisites header (<code>prereqs.h</code>) is now used in ALL source files</p>
+<p style="text-align:justify;"><strong>Unified refresher</strong>: I made this change originally as a contribution to YQ2 and submitted it as a pull request, it'll be present after 5.11 release. Originally, on YQ2 the refresher (or renderer) was separated as a DLL and the same imports/exports way of doing things were present between it and the kernel, I proceeded to get rid of that, the kernel is now <em>tightly coded with the renderer,</em> a lot of refactoring was indeed necessary for this to happen. This was in fact the change that started to inspire this whole project.</p>
+<p style="text-align:justify;"><a href="http://cmake.org" target="_blank"><strong>CMake</strong></a>: I just love it, and it's sincerely the biggest strength of <em>htq2</em> so far. It gives <em>htq2</em> the power to be built virtually anywhere, and not only that, many features are now controlled by this baby: OS detection, architecture detection, byte order detection, headers and libraries detection, symbol definitions through a dynamic configuration header (<code>config.h</code>), cross-compilation, enabling/disabling features, etc. I originally started with <a href="http://industriousone.com/premake" target="_blank">premake4</a> experimentation as it looked really good, and it is, but its lack of modules for finding basic stuff made the way for CMake to win the race.</p>
+<p style="text-align:justify;"><strong>No QAL</strong>: No, it doesn't mean that OpenAL isn't there anymore, it means that OpenAL backend is no longer based on crazy QAL pointers, OpenAL is used directly instead (when enabled on CMake). A great amount of this contribution came from <a href="http://ioquake3.org" target="_blank">ioquake3</a>'s QAL implementation.</p>
+<p style="text-align:justify;"><strong>Get rid of CD-Audio playback</strong>: Yes, it means it, I ripped off any CDA support for two reasons: the first one is to give priority to the <a href="http://ogg.org" target="_blank">OGG</a> music backend and the second and most important is that <em>htq2</em> will migrate eventually to <a href="http://libsdl.org" target="_blank">SDL2</a> (an article on this matter will be discussed soon), and we all know that this new kid on the blocks comes with <a href="http://wiki.libsdl.org/moin.fcg/MigrationGuide#CD-ROM" target="_blank">no CD support at all</a>.</p>
+<p style="text-align:justify;"><strong>Generic Hunk allocator (based on plain <code>malloc</code>/<code>free</code>)</strong>:  This is a general purpose <code>Hunk_*</code> backend based solely on plain <code>malloc</code>/<code>free</code>. I made this when I realized that YQ2 memory system was tightly coded with direct system calls, which is great in fact, but as soon as you try to port the engine to another OS ... well ... you'll get issues. So, I made a <em>generic Hunk memory system</em> for that, totally based on C standard library, it is not intended for production purposes, <em>it should be used only as a generic solution for memory allocation</em> so it would be a lot easier to port <em>htq2</em> to non-unix/non-windows platforms, despite all of this it should be know that direct system calls are still by far the best option. The Hunk memory system is now separated into two parts, a high level layer where typical Hunk_* calls are residing, and a low level system-dependent layer in which the dirty work is actually done, this subsystem is called by the high level subsystem and its entry points are <code>Sys_HunkBegin</code>, <code>Sys_HunkAlloc</code>, <code>Sys_HunkEnd</code> and <code>Sys_HunkFree</code>.</p>
+<p>[caption id="attachment_93" align="alignright" width="300"]<a href="http://axltxl.files.wordpress.com/2013/11/hunk.png"><img class="size-medium wp-image-93" alt="htq2 using generic Hunk memory driver with tracing for debug" src="{{ site.baseurl }}/assets/hunk.png?w=300" width="300" height="235" /></a> htq2 using generic Hunk memory driver with tracing for debug[/caption]</p>
+<p style="text-align:justify;">The code seems fairly solid at this point, although there are still some very small deficiencies to be fixed up. The project's source code tarball can be obtained at <a href="http://alericoveri.com.ve/htq2" target="_blank">alericoveri.com.ve/htq2</a> or if you prefer it, you can get it at <a href="http://github.com/alericoveri/hecatomb.git" target="_blank">GitHub</a>.</p>
+<p style="text-align:justify;">Now that you've seen a glance of what <em>htq2</em> is about, I invite you do a test drive of it. If you have any interest in tweaking deficiencies, reporting issues or make a general contribution,  please feel free to do them so as pull requests on <a href="http://github.com/alericoveri/hecatomb.git" target="_blank">GitHub</a> , I will appreciate it a lot. <b>Hecatomb Quake II is being released in the same terms as his YQ2 ancestor, it's free as in freedom under the terms of the GPLv2 license</b>. Come and <strong>join in our IRC channel</strong> to have realtime information and latest updates about <strong>Hecatomb Quake II</strong>. Feel free to chat with us, tell us about your ideas and proposals, make your questions, bug reports, etc. Connect to <em>irc.freenode.net</em> and join <em>#htq2</em>.</p>
+<p>Prost! Happy fragging! :)<br />
+Alejandro.</p>

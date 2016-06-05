@@ -1,0 +1,66 @@
+---
+layout: post
+title: htq2 - No more QGL pointers
+date: 2013-06-11 12:55:29.000000000 +02:00
+type: post
+published: true
+status: publish
+categories:
+- "*nix"
+- Computer Liebe
+- Computer Programming
+- English
+- Games
+- Gaming
+- Hecatomb Quake II
+- Open Source
+tags:
+- computer
+- games
+- gaming
+- linux
+- open source
+- quake gl
+- software
+meta:
+  _edit_last: '36458306'
+  _publicize_pending: '1'
+  _wpas_done_2067503: '1'
+  _wpas_done_2067514: '1'
+  publicize_reach: a:3:{s:7:"twitter";a:1:{i:2067514;i:188;}s:2:"fb";a:1:{i:2067503;i:373;}s:2:"wp";a:1:{i:0;i:3;}}
+  _publicize_done_external: a:1:{s:8:"facebook";a:1:{i:635926017;b:1;}}
+  publicize_twitter_user: alericoveri
+  _wpas_done_2423482: '1'
+  _wpas_skip_2067503: '1'
+  _wpas_skip_2067514: '1'
+  _wpas_skip_2423482: '1'
+  tagazine-media: a:7:{s:7:"primary";s:60:"http://alericoveri.files.wordpress.com/2013/06/htq2_logo.png";s:6:"images";a:1:{s:60:"http://alericoveri.files.wordpress.com/2013/06/htq2_logo.png";a:6:{s:8:"file_url";s:60:"http://alericoveri.files.wordpress.com/2013/06/htq2_logo.png";s:5:"width";i:512;s:6:"height";i:512;s:4:"type";s:5:"image";s:4:"area";i:262144;s:9:"file_path";b:0;}}s:6:"videos";a:0:{}s:11:"image_count";i:2;s:6:"author";s:8:"36458306";s:7:"blog_id";s:8:"51693188";s:9:"mod_stamp";s:19:"2013-06-11
+    17:31:46";}
+author:
+  login: axltxl
+  email: me@axltxl.xyz
+  display_name: Axel Texel
+  first_name: ''
+  last_name: ''
+---
+<p style="text-align:justify;"><img class="alignright size-thumbnail wp-image-163" alt="htq2_logo" src="{{ site.baseurl }}/assets/htq2_logo.png?w=150" width="150" height="150" />That's right!, from now on <em>htq2</em> will be using OpenGL <em><strong>directly</strong></em>, QGL only exists solely for the purpose of dealing with OpenGL extensions, all of this will be available for the<strong> 0.2 release</strong>!.</p>
+<p style="text-align:justify;">For those who still don't know, QGL is the <em>Quake GL system</em>, an abstraction of the <a href="http://www.opengl.org/" target="_blank">OpenGL</a> subsystem used by the Quake II<em> refresher</em>. OpenGL functions and extensions are not called directly, instead, they're called through analogous functions <code></code> (e.g. <code>qglVertex3f</code> -&gt; <code>glVertex3f</code>). This brings up a question ...</p>
+<p style="text-align:justify;"><strong>Why did QGL exist in the first place?<!--more--></strong></p>
+<p style="text-align:justify;">There are a bunch a reasons, those who're obvious and those that I found while I was digging through it. Before I begin, I would like to tell you that what you're about to read is only based on my own deductions, not actual facts, in fact, there is not much documentation about development chronicles and details for Quake II at 1996-1997, these are mainly theories (I want to really leave that clear). Back in around 1996, <a href="http://www.idsoftware.com/" target="_blank">id Software</a> (<em>a.k.a</em>. The <a href="http://en.wikipedia.org/wiki/John_Carmack" target="_blank">Carmack</a> Bunch) had certain issues around the ongoing development of the Q2 engine (not to mention OpenGL implementations immaturity at that time which led the development of the infamous <code>ref_soft</code> implementation). The biggest issue around it was porting it to other platforms like those free-spirit <a href="http://en.wikipedia.org/wiki/Linux" target="_blank">Linux</a> distributions, taking their particular OpenGL implementations in mind. The need of bringing up a binary who could easily link with virtually any OpenGL implementation without releasing/relinking any source code made the way for one solution: John Carmack (or someone else maybe) probably came to the conclusion that OpenGL was meant to be <em>dynamically used at runtime</em>, that means that the best way of using OpenGL was to take their function pointers (via <code>GetProcAddress</code> on Windows or <code>dlopen</code>/<code>dlsym</code> on *nix) and then use them. It would be hard to implement but at the end of the day, the final user could easily switch his/her q2 binary to whatever OpenGL implementation had available on his/her OS by just setting the <code>gl_driver</code> cvar on the command line, whether it was at <code>/lib/libGL.so</code>, <code>/usr/lib/liGL.so.1</code>, <code>/usr/lib/libGL-mesa.so.4</code> or whatever. In that way, Q2 would still depend on OpenGL but without having the resulting binary tighten up (linked) with a specific OpenGL dynamic library, there are clearly other methods for cheating the dynamic loader at the target platform, we all know that, but it seems that from Carmack's <code>fov</code>, not every gamer had that enough knowledge (at least back in those days when Linux distros were much more difficult to use and manipulate). Times change, operating systems change, and since a long time the Q2 source code was released under GPL terms, and now that QGL necessity basically .... deceased, the QGL code would still be there, but it's like looking at your <a href="http://images3.wikia.nocookie.net/__cb20090701192753/nintendo/en/images/0/00/NESActionSet.jpg" target="_blank">NES Action Set</a> more or less, it's got no practical use today. The other reason of QGL existence is discussed at <a href="http://omcfadde.blogspot.com/2010/09/quake-3-qgl-api.html" target="_blank">this article</a> by Oliver McFadden on the Q3A engine:</p>
+<blockquote><p>I'm sure having the qgl API made sense at some point in time (GL 1.x) however now it's just a pain for doing any kind of porting.</p>
+<p style="text-align:right;"><strong>Oliver McFadden</strong></p>
+</blockquote>
+<p style="text-align:justify;">It seems that QGL found its way to be more useful for OpenGL call tracing, you would set <code>gl_log</code> cvar to 1 and that was it, you would get a nice and really big file filled with text that basically tells you all the OpenGL calls that were made during execution, I did that one time for 15 seconds and I got a 100 Mb file and a big performance hit on the rendering pipeline! <a title="rolleyes" href="http://codex.wordpress.org/File:icon_rolleyes.gif"><img alt="rolleyes" src="{{ site.baseurl }}/assets/icon_rolleyes.gif" width="15" height="15" border="0" /></a> .</p>
+<p style="text-align:justify;">Like I said before, this is also no longer necessary, there are dedicated technologies like <a href="http://apitrace.github.io/" target="_blank">apitrace</a>, who flawledsly traces all OpenGL calls made by an executable and much more. So, with all that in the table, I came to my own conclusion:  it was time to get rid of QGL, I did it in the style of <a href="http://ioquake3.org" target="_blank">ioquake3</a>, leaving only qgl pointers to functions related with OpenGL extensions.</p>
+<p style="text-align:justify;"><strong>Changelog summary:</strong></p>
+<ul style="text-align:justify;">
+<li>qgl extension pointers are the only thing left. Just like in <a href="http://ioquake3.org" target="_blank">ioquake3</a>.</li>
+<li><code>QGL_GetProcAddress</code> (as an abstraction of <a href="http://sdl.beuc.net/sdl.wiki/SDL_GL_GetProcAddress" target="_blank"><code>SDL_GL_GetProcAddress</code></a>) will now handle the assignment of qgl extension function pointers</li>
+<li><code>QGL_Init</code> now only brings up the qgl extension pointers and <code>QGL_Shutdown</code> tear them down (to <code>NULL</code>)</li>
+<li><code>gl_log</code> cvar and GL logging system are now purged</li>
+<li><code>gl_driver</code> cvar is now purged</li>
+<li>Severe code cleanup</li>
+</ul>
+<p style="text-align:justify;">You can watch all of those changes in my <a href="https://github.com/alericoveri/hecatomb/tree/noqgl" target="_blank"><code>noqgl</code> branch on GitHub</a>, it'll be merged into <code>master</code> around this weekend.</p>
+<p style="text-align:justify;">Je vous dis adieu, ;)<br />
+Alejandro</p>
